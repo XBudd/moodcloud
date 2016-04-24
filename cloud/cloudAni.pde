@@ -1,10 +1,27 @@
+/* Class for Cloud Animations (Movement of clouds) */
 ArrayList<CloudAni> clouds;
 
 float xoff = 0.0;
 float yoff = 200.0;
-
-
-
+int cloudR;
+int cloudG;
+int cloudB;
+color complement = (155);
+color cloudColor (color original){
+   float R = red(original);
+   float G = green(original);
+   float B = blue(original);
+   float minRGB = min(R,min(G,B));
+   float maxRGB = max(R,max(G,B));
+   float minPlusMax = minRGB + maxRGB;
+    complement = color(minPlusMax-R, minPlusMax-G, minPlusMax-B);
+ 
+//  cloudR = r/2;
+ // cloudG = g/2;
+ // cloudB = b/2;
+ return complement;
+ 
+}
 class CloudAni {
   float x;
   float y;
@@ -36,6 +53,7 @@ class CloudAni {
     return s;
   }
 
+
   void update() {
     if (y<-s/4) {
       s = 30 + random(30);
@@ -52,7 +70,9 @@ class CloudAni {
 
     // Drawing Cloud.
     noStroke();
-    fill(150, 150, 150, cloudDensity);
+    
+    fill(155,155,155, cloudDensity);
+    
     for (float i=s; i>0; i-=2) {
       ellipse(x, y, i, i/2);
     }
@@ -68,6 +88,7 @@ class CloudAni {
     }
   }
 }
+
 
 void updateCloudAni() {
   xoff = xoff + .001;

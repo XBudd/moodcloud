@@ -1,5 +1,7 @@
 /* Colin Budd
  * 12/15/15
+ * Simple class for getting data from the table on current weather.
+ * Table is generated through the cloud_online_resources.pde 
  */
 
 class readTable {
@@ -19,10 +21,13 @@ class readTable {
   String tSkyColorR;
   String tSkyColorG;
   String tSkyColorB;
+  
+  String tSkyBright;
 
   void getTable() {
     try {
       try{
+        //point file path to location of your weather CV file
       tTable = loadTable("C:/Users/tailormade/Documents/Processing/cloud_online_resources/data/weatherLog.csv", "header");
       }catch(IllegalArgumentException a){
         println("table not read");
@@ -31,6 +36,7 @@ class readTable {
           getTable();
         }
       }
+      print("-------------------- \n");
       println(tTable.getRowCount() + " total rows in table"); 
 
  tRow = tTable.getRow(0);
@@ -42,17 +48,18 @@ class readTable {
       tSkyColorR = tRow.getString("skyColorR");
       tSkyColorB = tRow.getString("skyColorB");
       tSkyColorG = tRow.getString("skyColorG");
+      tSkyBright = tRow.getString("skyBright");
       printWeather();
     }
 
     catch(NullPointerException e) {
-      println("did not load table for weather");
+      println("Null: did not load table for weather");
     }
   }
 
   void printWeather() {
     println(hour() +":"+ minute() + " || " + tId + " is currently " + tCondition + " and " + tTemp +
-      " with windSpeed of " + tWindSpeed + ", dayLight = " + tDayLight + " and skyColor = " + tSkyColor);
+      " with windSpeed of " + tWindSpeed + ", \n dayLight = " + tDayLight + " and skyColor = " + tSkyColor);
   }
   // Get the dayLight
   Boolean getDayLight() {
@@ -69,7 +76,9 @@ class readTable {
     return Integer.parseInt(tSkyColorG);
   }
 
-
+ int getSkyBright() {
+     return Integer.parseInt(tSkyBright);
+   }
 
   // Get the temperature
   float getTemp() {

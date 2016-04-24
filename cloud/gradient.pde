@@ -1,3 +1,7 @@
+/* Function for creating and maintaining bg gradient.
+ * This alters the series of LED bands. 
+ */
+
 int[] moodArray = new int[24];
 
 void setGradient(int x, int y, float w, float h, color c1, color c2 ) {
@@ -9,10 +13,11 @@ void setGradient(int x, int y, float w, float h, color c1, color c2 ) {
     rect(i, y, 1, h);
   }
 }
-
+// Creates a build-up of colors (like a history). 
+// Problematic since it makes cloud look washed out after running for a while.
 void newMood(int m) {
-  moodArray = subset(moodArray, 1);
-  moodArray = append(moodArray, m);
+  //moodArray = subset(moodArray, 1);
+ // moodArray = append(moodArray, m);
   //println(moodArray);
 }
 

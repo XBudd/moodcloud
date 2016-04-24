@@ -39,26 +39,27 @@ class WeatherGrabber {
     boolean dayLight = false;
     int hour = int(timeH);
     int min = int(timeM);
+    
+    print("\n hour = " + hour + " & minute = " + min);
     int setH = int(set.substring(0, set.indexOf(":")));
     int setM = int(set.substring(rise.indexOf(":")+1));
     int riseH = int(rise.substring(0, rise.indexOf(":")));
     int riseM = int(rise.substring(rise.indexOf(":")+1));
-   
     //doing this the hard way...
-    if (hour > riseH) { 
-      if (hour == setH) {
+    if (hour > riseH - 1 ) { 
+      if (hour == setH +1 ) {
         if (min >= setM) {
-          //NIGHT TIME
+          //NIGHT TIME (sunset + 1 hour)
           dayLight = false;
         } else {
           dayLight = true;
         }
-      } else if (hour > setH ) {
+      } else if (hour > setH + 1) {
         dayLight = false;
-      } else { //current hour is before set time
-        dayLight = true;
+      } else {  //current hour is before set time
+       dayLight = true;
       }
-    } else if (hour == riseH) { 
+    } else if (hour == riseH - 1) { 
       if (min >= riseM) {
         dayLight = true;
       } else {
@@ -67,9 +68,8 @@ class WeatherGrabber {
     } else {
       dayLight = false;
     }
-    return dayLight;
+    return dayLight; 
   }
-
 
   // Get the temperature
   float getTemp() {
@@ -92,7 +92,7 @@ class WeatherGrabber {
   void requestWeather() {
     // Get all the HTML/XML source code into an array of strings
     // (each line is one element in the array)
-    String url = "http://www.wunderground.com/cgi-bin/findweather/getForecast?query=KITH";
+    String url = "https://www.wunderground.com/cgi-bin/findweather/getForecast?query=KITH";
     String[] lines = loadStrings(url);
 
     // Turn array into one long String
@@ -103,7 +103,7 @@ class WeatherGrabber {
     String end = ",";
     weather = giveMeTextBetween(xml, lookfor, end);
     weather = weather.replaceFirst("\"", ""); 
-
+    print(weather);
     // Searching for temperature
     lookfor = "\"temperature\":";
     temperature = float(giveMeTextBetween (xml, lookfor, end));
@@ -124,7 +124,6 @@ class WeatherGrabber {
     lookfor = "\"cc-sun-set\">";
     set = giveMeTextBetween (xml, lookfor, end);
     //println(set);
-
 
     // Searching for time 
     lookfor = "\"hour\":";

@@ -1,3 +1,4 @@
+/* Class for animation of background (LED strip) effects */
 class Ani {
   PImage ani;
   int f;
