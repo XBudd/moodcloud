@@ -1,6 +1,3 @@
-/* No longer used. Originally handled iPadd data transfers. */
-/*
-
 import processing.net.*;
 import java.net.SocketException;
 
@@ -29,4 +26,3 @@ int getMessege() {
   return int(s);
   
 }
-*/

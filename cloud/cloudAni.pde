@@ -71,7 +71,8 @@ class CloudAni {
     // Drawing Cloud.
     noStroke();
     
-    fill(155,155,155, cloudDensity);
+    //set cloud color to sky color (or current condition)
+     fill(color(rt.getSkyColorR(), rt.getSkyColorG(), rt.getSkyColorB()), cloudDensity);
     
     for (float i=s; i>0; i-=2) {
       ellipse(x, y, i, i/2);

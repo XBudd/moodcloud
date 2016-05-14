@@ -1,5 +1,5 @@
 /* Colin Budd
- * December 15, 2015
+ * v.1.6 -- May 14, 2016
  * Cornell University
  */
 
@@ -23,14 +23,6 @@ skyColor sc;
 int x = 0;
 
 
-void setup() {
-  size(200, 200);
-  // Set location and get skycolor
-  wg = new WeatherGrabber("14850");  // Cornell's Zip Code
-  sc = new skyColor();
-  sc.findSkyColor();
-}
-
 // Contours are used to determine if skycam is looking at the correct image. 
 // The crop of the sky (correct image) will have relatively few contours compared
 // to the crop of Willard Straight Hall so we want to reject any image that has 
@@ -50,6 +42,15 @@ int contourSize() {
 void contoursClear() {
   contours.clear();
 }
+
+void setup() {
+  size(200, 200);
+  // Set location and get skycolor
+  wg = new WeatherGrabber("14850");  // Cornell's Zip Code
+  sc = new skyColor();
+  sc.findSkyColor();
+}
+
 
 void draw() {
   if (minute() % 5 == 0) { //write to file every 5 minutes
@@ -89,10 +90,7 @@ void writeFile() {
         data[8] = String.valueOf(sc.getSkyColorB());
         data[9] = String.valueOf(sc.getSkyColorG());
         data[10] = String.valueOf(sc.getSkyBright());
-        println("\n skyBright is: " + String.valueOf(sc.getSkyBright()));
-        //this if case will fill the array just if the search is null               
-
-
+   
         for (int k=0; k < data.length; k++) {
           writer.write(data[k] + ",");
           x++;

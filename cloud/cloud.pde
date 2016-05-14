@@ -1,4 +1,4 @@
-/* Colin Budd - 4/21/2016
+/* Colin Budd - 5/14/2016
  * "weather@mood.cloud"
  * Cornell University
  * Modified version of original mood.cloud.
@@ -46,8 +46,7 @@ void setup() {
   // Create and call weather table reader
   rt = new readTable();
   rt.getTable();
-  float x = map(rt.getWindSpeed(), 0.0, 60.0, 3.0, 180.0);
-  windSpeed = int(x);
+  windSpeed =int(map(rt.getWindSpeed(), 0.0, 100.0, 3.0, 60.0));
   skyBright = rt.getSkyBright();
   cloudDensity = skyBright; //set LED intensity to match outside brightness
   
@@ -90,32 +89,23 @@ void setup() {
 }
 
 void draw() {
-  if (minute() % 5 == 0 && millis() == 50000) { //every 5 mins and 50 seconds
+  if (minute() % 5 == 0 & millis() == 50000) { //every 5 mins and 50 seconds
     rt.getTable(); //check for new weather
-   
-  }
+  } 
 
-  //set bg to current sky color 
-  bg = color(rt.getSkyColorR(), rt.getSkyColorG(), rt.getSkyColorB());
-  cloudColor(color(rt.getSkyColorR(), rt.getSkyColorG(), rt.getSkyColorB()));
   cloudDensity = skyBright;
-  //is it day? 
-  dayLight = rt.getDayLight();
- 
+  updateCloudAni(); 
 
-  if (brightness(bg) <55) { // if too dark to make impactful difference in LED brightness
-    bg = 0; //set bg to pure black
-  } else {
-    background(bg); //otherwise set bg to sky color
-  }
 
 // Draw the background gradient 
   drawGradient();
   if (lastInteractionMillis < millis() - cloudAnimationInterval * 1000) {
-    fill(0, min(100, (millis() - lastInteractionMillis - cloudAnimationInterval * 1000) / 100));
+    //set background to black
+    fill(0,0,0);
     rect(0, 0, width, height);
     updateCloudAni(); 
   }
+  
   updateAni();
   if (!testWidthOutTeensy) {
     sendData();
@@ -134,10 +124,8 @@ void keyPressed() {
 }
 // You can test an update of weather data by clicking on the canvas.
 void mouseClicked() {
-  // updateSkyColor();
   rt.getTable();
-  float x = map(rt.getWindSpeed(), 0.0, 50.0, 3.0, 180.0);
-  windSpeed = int(x);
+   windSpeed =int(map(rt.getWindSpeed(), 0.0, 100.0, 3.0, 60.0));
  cloudDensity = skyBright;
 }
 

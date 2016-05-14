@@ -39,7 +39,7 @@ class readTable {
       print("-------------------- \n");
       println(tTable.getRowCount() + " total rows in table"); 
 
- tRow = tTable.getRow(0);
+      tRow = tTable.getRow(0);
       tId = tRow.getInt("id");
       tCondition = tRow.getString("condition");
       tTemp = tRow.getString("temp");
@@ -59,8 +59,11 @@ class readTable {
 
   void printWeather() {
     println(hour() +":"+ minute() + " || " + tId + " is currently " + tCondition + " and " + tTemp +
-      " with windSpeed of " + tWindSpeed + ", \n dayLight = " + tDayLight + " and skyColor = " + tSkyColor);
+      " with windSpeed of " + tWindSpeed + ", \n dayLight = " + tDayLight + ", skyColor = " + tSkyColor + 
+      ", and brightness = " + tSkyBright
+      );
   }
+  
   // Get the dayLight
   Boolean getDayLight() {
     return Boolean.valueOf(tDayLight);

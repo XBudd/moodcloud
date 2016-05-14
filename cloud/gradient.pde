@@ -27,7 +27,7 @@ void drawGradient() {
       //sets the reesidual bars - needed for continued effect
      setGradient(0, i, 90, 1, colorArray[(moodArray[i]-1)*2], colorArray[(moodArray[i]-1)*2+1]);
      setGradient(90, i, 90, 1, colorArray[(moodArray[i]-1)*2+1], colorArray[(moodArray[i]-1)*2]);
-    }
+   }
   }
 }
 
