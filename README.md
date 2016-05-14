@@ -243,6 +243,7 @@ All code and resources can be found via this repository with inline comments and
 ##### 3. weatherGrabber
 
 > Based on Daniel Shiffman’s “Example 18-5” found on: www.learningprocessing.com — see page for more information.
+
 - Class for obtaining weather data through the parsing of Weather Underground’s site specific page for a given location/weathervane.
 
 
@@ -250,12 +251,14 @@ All code and resources can be found via this repository with inline comments and
     - using the predicted sunrise and sunset times from Weather Underground, determines if the current hour and minute exists before, during, or after sunrise or sunset.
         - if in-between sunrise and sunset, it is daytime.
         - If after sunset and before sunrise, it is nighttime.
-        -
+        
     > **Note:** this is not the prettiest way of coding this logic, but was a fun experiment done on the fly! Maintained for future exploration but is no longer incorporated into main functionality of weather@mood.cloud
 
 - ##### requestWeather()
     - makes the XML request and pulls in information from the given weathervane (as specified in URL)
+    
         - **Note:** here, using a local Ithaca weathervane due to a series of issues in operation of Cornell’s weathervane during April, 2016
+        
     - Parses the xml of the site for specified words or phrases and returns the characters contained from that given string to another given string — here, a comma, as set by **end** and run through **giveMeTextBetween**
     
 - ##### giveMeTextBetween()
