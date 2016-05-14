@@ -268,3 +268,8 @@ All code and resources can be found via this repository with inline comments and
         - **before** is the collection character to look for, such as “wind speed:”
         - **after** is the end position of string
     - Goes through body of text to find specified strings and then produces their returned values or a blank string if not found
+    
+-------
+## Help and Suppot
+Have a question? Find a bug? Head on over to the wiki! 
+
