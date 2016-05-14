@@ -102,12 +102,12 @@ All code and resources can be found via this repository with inline comments and
 - #####  setGradient()
     - blends the colors and holds their position within the bands as an overlay
     - pass in x, y, w, h, c1, and c2 values
-    - int x = x position
-    - int y = y positon
-    - float w = width
-    - flat h = height
-    - color c1 = first color
-    - color c2 = second color
+    - int **x** = x position
+    - int **y** = y positon
+    - float **w** = width
+    - flat **h** = height
+    - color **c1** = first color
+    - color **c2** = second color
     
 - #####  newMood()
     - This creates the persistence of colors over long durations, with each color holding its place and moving up one band when new mood (color) is introduced
@@ -188,6 +188,7 @@ All code and resources can be found via this repository with inline comments and
 ------
 ##### 2. skyColor
 > class which loads live image from Cornell’s Live Cam above Ho Plaza, crops to a corner containing just sky, averages the pixels, and then extracts an average color and brightness based on this data to represent the current skyBright and skyColor
+
 - ##### getEvenOdd()
     - used to determine if the live Cornell Cam is more often displaying the full view containing sky on even or odd minutes since not a standard interval aligning to internal clock
     
@@ -233,6 +234,7 @@ All code and resources can be found via this repository with inline comments and
 - ##### getAverageBright()
 
     > **Note:** code obtained from: forum.proessing.org/two/discussion/3270/how-to-get-pixel-intensity-not-brightness
+    
    - pass in color
     - Using the average color as a basis, finds the luminous value of the color and then maps to a luminous range, **luminRange**, on scale of 1 to 10 so as to create an easily accessible range of brightnesses for the LEDs to use (through **cloudDensity**)
     - returns the **luminRange**
@@ -248,13 +250,14 @@ All code and resources can be found via this repository with inline comments and
     - using the predicted sunrise and sunset times from Weather Underground, determines if the current hour and minute exists before, during, or after sunrise or sunset.
         - if in-between sunrise and sunset, it is daytime.
         - If after sunset and before sunrise, it is nighttime.
+        -
     > **Note:** this is not the prettiest way of coding this logic, but was a fun experiment done on the fly! Maintained for future exploration but is no longer incorporated into main functionality of weather@mood.cloud
 
 - ##### requestWeather()
     - makes the XML request and pulls in information from the given weathervane (as specified in URL)
         - **Note:** here, using a local Ithaca weathervane due to a series of issues in operation of Cornell’s weathervane during April, 2016
     - Parses the xml of the site for specified words or phrases and returns the characters contained from that given string to another given string — here, a comma, as set by **end** and run through **giveMeTextBetween**
-    -
+    
 - ##### giveMeTextBetween()
 
     - pass in String **s**, String **before**, String **after**
